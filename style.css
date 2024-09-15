@@ -1,0 +1,145 @@
+/* Reset */
+
+:root {
+    --ContainerColor: #5c47ad;
+    --bottonColor: #1678a5;
+    --deleteBtnColor: brown;
+    --backgroundColor: rgb(14, 11, 26);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto";
+    background-color: var(--backgroundColor);
+}
+
+.main-menu {
+    color: aliceblue;
+    font-size: 25px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.menu-button,
+.input-data-button,
+.task-buttons {
+    border: none;
+    border-radius: 3px;
+    color: aliceblue;
+    background-color: var(--bottonColor);
+    margin-right: 10px;
+    padding: 5px;
+    font-weight: bold;
+    min-width: fit-content;
+}
+
+.input-data-button {
+    margin-right: 0px;
+}
+
+.input-name {
+    font-family: inherit;
+    font-size: 153x;
+    font-weight: bold;
+}
+
+.delete-button {
+    background-color: var(--deleteBtnColor);
+}
+
+.menu-button:hover,
+.task-buttons:hover {
+    opacity: 0.6;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.input-data-button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.input-data-container {
+    font-family: inherit;
+    font-weight: bold;
+    padding: 10px;
+    display: grid;
+    gap: 10px;
+    background-color: var(--ContainerColor);
+    border-radius: 5px;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    box-shadow: 15px 15px 10px rgba(240, 248, 255, 0.164);
+}
+
+.hide-input-container {
+    display: none;
+}
+
+.stage-containers {
+    /*border: 3px solid white;*/
+    min-width: 360px;
+}
+
+.task-buttons {
+    max-width: fit-content;
+}
+
+.tasks-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    font-family: inherit;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.task-container {
+    font-family: inherit;
+    font-size: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--ContainerColor);
+    border-radius: 5px;
+    box-shadow: 15px 15px 10px rgba(240, 248, 255, 0.164);
+}
+
+.title-and-buttons {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.description {
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+
+/* @media screen (max-width:425) {
+    .tasks-container {
+        display: flex;
+    }
+} */
