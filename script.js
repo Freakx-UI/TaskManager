@@ -15,50 +15,8 @@ document.querySelector('.input-data-button').addEventListener('click', () => {
 function openInputConatainer() {
     document.querySelector('.input-data-container').classList.remove('hide-input-container');
 }
-renderHTMl();
+renderHTMl(taskList);
 
-function renderHTMl() {
-
-    let todoHTMl = '';
-    let inprogressHTMl = '';
-    let onholdHTMl = '';
-    let doneHTML = '';
-    let html;
-
-    taskList.forEach((task, index) => {
-
-        html += `
-        <div class="task-container">
-            <div class="title-and-buttons">
-                <div class="name">${task.name}</div>
-                <div>
-                    <button class="move-forward task-buttons" data-task-stage="${task.stage}">
-                        <i class="fa-solid fa-forward"></i></button>
-                    <button class="delete-task-button task-buttons delete-button"
-                     data-task-id="${task.id} data-task-index="${index}">
-                        <i class="fa-solid fa-trash"></i></button></div>
-            </div>
-            <div class="description">${task.description}</div>
-        </div>
-    `;
-        if (task.stage === 'todo') {
-            todoHTMl = html;
-        } else if (task.stage === 'inprogress') {
-            inprogressHTMl = html;
-        } else if (task.stage === 'onhold') {
-            onhold = html;
-        } else if (task.stage === 'done') {
-            doneHTML = html;
-        }
-
-    });
-    document.querySelector('.to-do-container').innerHTML = todoHTMl;
-    document.querySelector('.in-progress-container ').innerHTML = inprogressHTMl;
-    document.querySelector('.on-hold-container').innerHTML = onholdHTMl;
-    document.querySelector('.done-container').innerHTML = doneHTML;
-    deleteTask();
-    forwardTask();
-}
 
 function addTask() {
     const inputName = document.querySelector('.input-name');
@@ -99,14 +57,47 @@ function deleteTask() {
 function forwardTask() {
     document.querySelectorAll('.move-forward').forEach((button) => {
         button.addEventListener('click', () => {
-            console.log(button.dataset.taskStage)
-            currentStage = button.dataset.taskStage;
-            if (currentStage === 'todo') {
-                currentStage = ' inprogress';
+            const taskId = parseInt(button.dataset.taskId);
+            const task = taskList.find(task => task.id === taskId);
+
+            if (task) {
+                switch (task.stage) {
+                    case 'todo':
+                        task.stage = 'inprogress';
+                        break;
+                    case 'inprogress':
+                        task.stage = 'done';
+                        break;
+                }
             }
             renderHTMl();
-
         });
     });
+};
 
+function moveToOnhold() {
+    document.querySelectorAll('.move-pause').forEach((button) => {
+        button.addEventListener('click', () => {
+            const taskId = parseInt(button.dataset.taskId);
+            const task = taskList.find(task => task.id === taskId);
+            if (task) {
+                task.stage = 'onhold';
+                renderHTMl();
+            }
+        });
+    });
 }
+
+function backwardTask() {
+    document.querySelectorAll('.move-backward ').forEach((button) => {
+        button.addEventListener('click', () => {
+            const taskId = parseInt(button.dataset.taskId);
+            const task = taskList.find(task => task.id === taskId);
+            if (task) {
+                task.stage = 'inprogress';
+                renderHTMl();
+            }
+        });
+    });
+}
+renderHTMl();

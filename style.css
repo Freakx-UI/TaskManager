@@ -124,6 +124,10 @@ body {
     box-shadow: 15px 15px 10px rgba(240, 248, 255, 0.164);
 }
 
+.tittle-line-through {
+    text-decoration: line-through
+}
+
 .title-and-buttons {
     display: flex;
     justify-content: space-between;
