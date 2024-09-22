@@ -9,41 +9,69 @@ function renderHTMl() {
     taskList.forEach((task, index) => {
         let buttonsHtml = '';
 
-        switch (task.stage) {
-            case 'todo':
-                buttonsHtml = `
+        // switch (task.stage) {
+        //     case 'todo':
+        //         buttonsHtml = `
+        //             <button class="move-forward task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-forward"></i></button>
+        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-trash"></i></button>
+        //         `;
+        //         break;
+        //     case 'inprogress':
+        //         buttonsHtml = `
+        //             <button class="move-pause task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-pause"></i></button>
+        //             <button class="move-forward task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-check"></i></button>
+        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-trash"></i></button>
+        //         `;
+        //         break;
+        //     case 'onhold':
+        //         buttonsHtml = `
+        //             <button class="move-backward task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-backward"></i></button>
+        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-trash"></i></button>
+        //         `;
+        //         break;
+        //     case 'done':
+        //         buttonsHtml = `
+        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+        //                 <i class="fa-solid fa-trash"></i></button>
+        //         `;
+        //         break;
+        // }
+
+        if (task.stage === 'todo') {
+            buttonsHtml = `
                     <button class="move-forward task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-forward"></i></button>
                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
-                        <i class="fa-solid fa-trash"></i></button>
-                `;
-                break;
-            case 'inprogress':
-                buttonsHtml = `
+                        <i class="fa-solid fa-trash"></i></button>`
+        } else if (task.stage === 'inprogress') {
+            buttonsHtml = `
                     <button class="move-pause task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-pause"></i></button>
                     <button class="move-forward task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-check"></i></button>
                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-trash"></i></button>
-                `;
-                break;
-            case 'onhold':
-                buttonsHtml = `
+                `
+        } else if (task.stage === 'onhold') {
+            buttonsHtml = `
                     <button class="move-backward task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-backward"></i></button>
                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-trash"></i></button>
-                `;
-                break;
-            case 'done':
-                buttonsHtml = `
+                `
+        } else if (task.stage === 'done') {
+            buttonsHtml = `
                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-trash"></i></button>
-                `;
-                break;
-        }
-
+                `
+        };
 
         const html = `
         <div class="task-container">

@@ -1,20 +1,40 @@
-let taskList = [];
+let taskList = loadFromStorage();
+
+function loadFromStorage() {
+    let tasks = localStorage.getItem("taskList");
+    let taskList = JSON.parse(tasks);
+    console.log(taskList);
+    if (taskList === 'null') {
+        taskList = [];
+    } else
+        return taskList
+}
+
+function saveToStorage() {
+    localStorage.setItem("taskList", JSON.stringify(taskList))
+}
 
 document.querySelector('.add-task-btn').addEventListener('click', () => {
-    openInputConatainer();
+    document.querySelector('.input-data-container').classList.remove('hide-input-container');
 });
-document.querySelector('.persist').addEventListener('click', () => {
+// function openInputConatainer() {
+//     document.querySelector('.input-data-container').classList.remove('hide-input-container');
+// }
 
+document.querySelector('.persist').addEventListener('click', () => {
+    saveToStorage();
 });
+document.querySelector('.delete-all-button').addEventListener('click', () => {
+    taskList = [];
+    saveToStorage();
+    renderHTMl();
+});
+
 document.querySelector('.input-data-button').addEventListener('click', () => {
     addTask();
 });
 
 
-
-function openInputConatainer() {
-    document.querySelector('.input-data-container').classList.remove('hide-input-container');
-}
 renderHTMl(taskList);
 
 
@@ -40,18 +60,16 @@ function addTask() {
     inputDescription.value = '';
 
     renderHTMl();
-
 }
 
 function deleteTask() {
     document.querySelectorAll('.delete-task-button').forEach((button) => {
         button.addEventListener('click', () => {
             taskList.splice(button.dataset.index, 1);
+            saveToStorage();
             renderHTMl();
-
         });
     });
-
 }
 
 function forwardTask() {
