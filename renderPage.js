@@ -1,48 +1,14 @@
 function renderHTMl() {
-
+    const listOfTask = TaskList.taskItem;
     let todoHTMl = '';
     let inprogressHTMl = '';
     let onholdHTMl = '';
     let doneHTML = '';
     let html = '';
 
-    taskList.forEach((task, index) => {
+    listOfTask.forEach((task, index) => {
+        console.log(listOfTask);
         let buttonsHtml = '';
-
-        // switch (task.stage) {
-        //     case 'todo':
-        //         buttonsHtml = `
-        //             <button class="move-forward task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-forward"></i></button>
-        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-trash"></i></button>
-        //         `;
-        //         break;
-        //     case 'inprogress':
-        //         buttonsHtml = `
-        //             <button class="move-pause task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-pause"></i></button>
-        //             <button class="move-forward task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-check"></i></button>
-        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-trash"></i></button>
-        //         `;
-        //         break;
-        //     case 'onhold':
-        //         buttonsHtml = `
-        //             <button class="move-backward task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-backward"></i></button>
-        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-trash"></i></button>
-        //         `;
-        //         break;
-        //     case 'done':
-        //         buttonsHtml = `
-        //             <button class="delete-task-button task-buttons" data-task-id="${task.id}">
-        //                 <i class="fa-solid fa-trash"></i></button>
-        //         `;
-        //         break;
-        // }
 
         if (task.stage === 'todo') {
             buttonsHtml = `
@@ -100,8 +66,8 @@ function renderHTMl() {
     document.querySelector('.in-progress-container ').innerHTML = inprogressHTMl;
     document.querySelector('.on-hold-container').innerHTML = onholdHTMl;
     document.querySelector('.done-container').innerHTML = doneHTML;
-    deleteTask();
-    forwardTask();
-    moveToOnhold();
-    backwardTask();
+    TaskList.deleteTask();
+    TaskList.forwardTask();
+    TaskList.moveToOnhold();
+    TaskList.backwardTask();
 }
