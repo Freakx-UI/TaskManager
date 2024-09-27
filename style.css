@@ -54,7 +54,7 @@ body {
 
 .input-name {
     font-family: inherit;
-    font-size: 153x;
+    font-size: 1rem;
     font-weight: bold;
 }
 
@@ -90,7 +90,7 @@ body {
     top: 50%;
     left: 50%;
     margin: -100px 0 0 -150px;
-    box-shadow: 15px 15px 10px rgba(240, 248, 255, 0.164);
+    box-shadow: 0.123rem rgba(240, 248, 255, 0.164);
 }
 
 .hide-input-container {
@@ -98,7 +98,8 @@ body {
 }
 
 .stage-containers {
-    min-width: 360px;
+    min-width: 25rem;
+    min-height: 20rem;
 }
 
 .task-buttons {
@@ -118,12 +119,12 @@ body {
 
 .task-container {
     font-family: inherit;
-    font-size: 10px;
+    font-size: 1rem;
     padding: 10px;
     margin-bottom: 10px;
     background-color: var(--ContainerColor);
     border-radius: 5px;
-    box-shadow: 10px 12px 10px rgba(240, 248, 255, 0.164);
+    box-shadow: 0.325rem 0.325rem 0.325rem rgba(240, 248, 255, 0.164);
 }
 
 .tittle-line-through {
@@ -143,9 +144,20 @@ body {
     margin-top: 10px;
 }
 
+.drag-border-show {
+    border-top: solid wheat;
+}
 
-/* @media screen (max-width:425) {
-    .tasks-container {
-        display: flex;
+@media only screen and (max-width: 1600px) {
+    .stage-containers {
+        min-width: 20rem;
+        min-height: 10rem;
     }
-} */
+}
+
+@media only screen and (max-width: 1400px) {
+    .stage-containers {
+        min-width: 15rem;
+        min-height: 10rem;
+    }
+}

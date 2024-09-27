@@ -1,17 +1,15 @@
 const TaskList = {
-
     taskItem: [],
 
     loadFromStorage(localStoragekey) {
-        this.taskItem = JSON.parse(localStorage.getItem(localStoragekey))
+        this.taskItem = JSON.parse(localStorage.getItem(localStoragekey));
         if (!this.taskItem) {
             this.taskItem = [];
         }
     },
     saveToStorage(localStoragekey, data) {
-        localStorage.setItem(localStoragekey, JSON.stringify(data))
+        localStorage.setItem(localStoragekey, JSON.stringify(data));
     },
-
 
     openATaskModule() {
         document.querySelector('.input-data-container').classList.remove('hide-input-container');
@@ -34,7 +32,7 @@ const TaskList = {
             description,
             id: this.taskItem.length + 1,
             stage: 'todo'
-        })
+        });
         inputName.value = '';
         inputDescription.value = '';
 
@@ -44,21 +42,21 @@ const TaskList = {
     deleteTask() {
         document.querySelectorAll('.delete-task-button').forEach((button) => {
             button.addEventListener('click', () => {
-                this.taskItem.splice(button.dataset.index, 1);
+                const index = this.taskItem.findIndex(task => task.id === parseInt(button.dataset.taskId));
+                this.taskItem.splice(index, 1);
                 renderHTMl();
             });
         });
     },
+
     deleteAllTask(localStoragekey) {
         document.querySelector('.delete-all-button').addEventListener('click', () => {
             this.taskItem = [];
-            TaskList.saveToStorage('tasks', this.taskItem)
-
+            this.saveToStorage(localStoragekey, this.taskItem);
             renderHTMl();
+            console.log(this.taskItem);
         });
-
     },
-
 
     forwardTask() {
         document.querySelectorAll('.move-forward').forEach((button) => {
@@ -80,7 +78,6 @@ const TaskList = {
             });
         });
     },
-
 
     moveToOnhold() {
         document.querySelectorAll('.move-pause').forEach((button) => {
@@ -107,26 +104,93 @@ const TaskList = {
             });
         });
     }
+};
+
+// function renderHTMl() {
+//     const listOfTask = TaskList.taskItem;
+//     let todoHTMl = '';
+//     let inprogressHTMl = '';
+//     let onholdHTMl = '';
+//     let doneHTML = '';
+//     let html = '';
+
+//     listOfTask.forEach((task, index) => {
+//         console.log(listOfTask);
+//         let buttonsHtml = '';
+
+//         if (task.stage === 'todo') {
+//             buttonsHtml = `
+//                     <button class="move-forward task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-forward"></i></button>
+//                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-trash"></i></button>`
+//         } else if (task.stage === 'inprogress') {
+//             buttonsHtml = `
+//                     <button class="move-pause task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-pause"></i></button>
+//                     <button class="move-forward task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-check"></i></button>
+//                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-trash"></i></button>
+//                 `
+//         } else if (task.stage === 'onhold') {
+//             buttonsHtml = `
+//                     <button class="move-backward task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-backward"></i></button>
+//                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-trash"></i></button>
+//                 `
+//         } else if (task.stage === 'done') {
+//             buttonsHtml = `
+//                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
+//                         <i class="fa-solid fa-trash"></i></button>
+//                 `
+//         };
+
+//         const html = `
+//         <div class="task-container">
+//             <div class="title-and-buttons">
+//                 <div class="name">${task.name}</div>
+//                 <div>
+//                     ${buttonsHtml}
+//                 </div>
+//             </div>
+//             <div class="description">${task.description}</div>
+//         </div>
+//     `;
+//         if (task.stage === 'todo') {
+//             todoHTMl += html;
+//         } else if (task.stage === 'inprogress') {
+//             inprogressHTMl += html;
+//         } else if (task.stage === 'onhold') {
+//             onholdHTMl += html;
+//         } else if (task.stage === 'done') {
+//             doneHTML += html;
+//             document.querySelector('.done-container').classList.add('tittle-line-through');
+//         }
+
+//     });
+//     document.querySelector('.to-do-container').innerHTML = todoHTMl;
+//     document.querySelector('.in-progress-container ').innerHTML = inprogressHTMl;
+//     document.querySelector('.on-hold-container').innerHTML = onholdHTMl;
+//     document.querySelector('.done-container').innerHTML = doneHTML;
+
+//     applyDragAndDrop();
+//     TaskList.deleteTask();
+//     TaskList.forwardTask();
+//     TaskList.moveToOnhold();
+//     TaskList.backwardTask();
+// }
 
 
 
-}
 
+document.querySelector('.add-task-btn')
+    .addEventListener('click', () => TaskList.openATaskModule());
 
-renderHTMl();
-document.querySelector('.add-task-btn').addEventListener('click', () => {
-    TaskList.openATaskModule();
-});
+document.querySelector('.input-data-button').addEventListener('click', () => TaskList.addTask());
 
-document.querySelector('.persist').addEventListener('click', () => {
-    console.log(TaskList.saveToStorage('tasks', TaskList.taskItem));
-});
-
-
-document.querySelector('.input-data-button').addEventListener('click', () => {
-    TaskList.addTask();
-});
+document.querySelector('.input-data-button').addEventListener('click', () => TaskList.deleteAllTask('tasks'));
 
 TaskList.loadFromStorage('tasks');
-TaskList.deleteAllTask('tasks');
 renderHTMl();
