@@ -146,5 +146,9 @@ document.querySelector('.add-new-task').addEventListener('click', () => TaskList
 
 document.querySelector('.input-data-button').addEventListener('click', () => TaskList.deleteAllTask('tasks'));
 
+document.querySelector('.persist-btn').addEventListener('click', () => TaskList.saveToStorage('tasks', TaskList.taskItem));
+
+
+TaskList.deleteAllTask('tasks');
 TaskList.loadFromStorage('tasks');
 renderHTMl();

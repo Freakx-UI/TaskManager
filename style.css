@@ -42,9 +42,10 @@ body {
     border-radius: 3px;
     color: aliceblue;
     background-color: var(--bottonColor);
-    margin-right: 10px;
-    padding: 5px;
+    margin-right: 0.625rem;
+    padding: 0.325rem;
     font-weight: bold;
+    font-size: 1rem;
     min-width: fit-content;
 }
 
@@ -78,7 +79,8 @@ body {
 .input-data-container {
     font-family: inherit;
     font-weight: bold;
-    padding: 10px;
+    font-size: 1.3rem;
+    padding: 0.625rem;
     display: grid;
     gap: 10px;
     background-color: var(--ContainerColor);
@@ -91,6 +93,10 @@ body {
     left: 50%;
     margin: -100px 0 0 -150px;
     box-shadow: 0.123rem rgba(240, 248, 255, 0.164);
+}
+
+.input-data-container textarea {
+    font-size: 1rem;
 }
 
 .hide-input-container {
@@ -120,10 +126,10 @@ body {
 .task-container {
     font-family: inherit;
     font-size: 1rem;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 0.625rem;
+    margin-bottom: 0.625rem;
     background-color: var(--ContainerColor);
-    border-radius: 5px;
+    border-radius: 0.325rem;
     box-shadow: 0.325rem 0.325rem 0.325rem rgba(240, 248, 255, 0.164);
 }
 
@@ -134,11 +140,11 @@ body {
 .title-and-buttons {
     display: flex;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 1.4rem;
 }
 
 .description {
-    font-size: 11px;
+    font-size: 1rem;
     display: flex;
     justify-content: center;
     margin-top: 10px;
