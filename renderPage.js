@@ -40,14 +40,14 @@ function renderHTMl() {
         };
 
         const html = `
-        <div class="task-container">
+        <div class="task-container" draggable="true" data-task-id="${task.id}">
             <div class="title-and-buttons">
                 <div class="name">${task.name}</div>
                 <div>
                     ${buttonsHtml}
                 </div>
             </div>
-            <div class="description">${task.description}</div>
+            <div class="description">${task.description.replaceAll("\n", "<br>")}</div>
         </div>
     `;
         if (task.stage === 'todo') {
@@ -66,8 +66,62 @@ function renderHTMl() {
     document.querySelector('.in-progress-container ').innerHTML = inprogressHTMl;
     document.querySelector('.on-hold-container').innerHTML = onholdHTMl;
     document.querySelector('.done-container').innerHTML = doneHTML;
+
+    applyDragAndDrop();
     TaskList.deleteTask();
     TaskList.forwardTask();
     TaskList.moveToOnhold();
     TaskList.backwardTask();
+}
+
+function applyDragAndDrop() {
+    console.log('this is drag and drop');
+    const taskContainers = document.querySelectorAll('.task-container');
+    const stageContainer = document.querySelectorAll('.stage-containers');
+
+    taskContainers.forEach(task => {
+        task.addEventListener('dragstart', handleDragStart);
+
+    });
+
+    stageContainer.forEach(task => {
+        task.addEventListener('dragover', handleDragOver);
+        task.addEventListener('drop', handleDrop);
+
+    });
+}
+
+function handleDragStart(event) {
+    event.dataTransfer.setData('text/plain', event.target.dataset.taskId);
+    document.querySelectorAll('.stage-containers').forEach(el => {
+        el.classList.add('drag-border-show');
+    });
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    const taskId = event.dataTransfer.getData('text/plain');
+    const task = TaskList.taskItem.find(task => task.id == taskId);
+    const taskClass = event.target.classList;
+    document.querySelectorAll('.stage-containers').forEach(el => {
+        el.classList.remove('drag-border-show');
+    });
+
+    if (task) {
+        if (taskClass.contains('to-do-container')) {
+            task.stage = 'todo';
+        } else if (taskClass.contains('in-progress-container')) {
+            task.stage = 'inprogress';
+        } else if (taskClass.contains('on-hold-container')) {
+            task.stage = 'onhold';
+        } else if (taskClass.contains('done-container')) {
+            task.stage = 'done';
+        }
+
+        renderHTMl();
+    }
 }
