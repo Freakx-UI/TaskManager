@@ -79,5 +79,4 @@ function renderHTMl() {
     TaskList.moveToOnhold();
     TaskList.backwardTask();
     TaskList.editTask();
-
 }
