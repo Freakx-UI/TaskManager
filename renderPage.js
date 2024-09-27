@@ -14,7 +14,7 @@ function renderHTMl() {
             buttonsHtml = `
                     <button class="move-forward task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-forward"></i></button>
-                    <button class="edit task-buttons" data-task-id="${task.id}">
+                    <button class="edit-btn task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-trash"></i></button>`
@@ -22,7 +22,7 @@ function renderHTMl() {
             buttonsHtml = `
                     <button class="move-pause task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-pause"></i></button>
-                    <button class="edit task-buttons" data-task-id="${task.id}">
+                    <button class="edit-btn task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="move-forward task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-check"></i></button>
@@ -33,7 +33,7 @@ function renderHTMl() {
             buttonsHtml = `
                     <button class="move-backward task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-backward"></i></button>
-                    <button class="edit task-buttons" data-task-id="${task.id}">
+                    <button class="edit-btn task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="delete-task-button task-buttons" data-task-id="${task.id}">
                         <i class="fa-solid fa-trash"></i></button>
@@ -78,4 +78,6 @@ function renderHTMl() {
     TaskList.forwardTask();
     TaskList.moveToOnhold();
     TaskList.backwardTask();
+    TaskList.editTask();
+
 }

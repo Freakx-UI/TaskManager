@@ -1,5 +1,6 @@
 const TaskList = {
     taskItem: [],
+    editingTaskId: null,
 
     loadFromStorage(localStoragekey) {
         this.taskItem = JSON.parse(localStorage.getItem(localStoragekey));
@@ -13,7 +14,10 @@ const TaskList = {
 
     openATaskModule() {
         document.querySelector('.input-data-container').classList.remove('hide-input-container');
+        const inputButton = document.querySelector('.input-data-button');
+        inputButton.textContent = this.editingTaskId ? 'Edit Task' : 'Add Task';
     },
+
 
     addTask() {
         const inputName = document.querySelector('.input-name');
@@ -21,18 +25,29 @@ const TaskList = {
 
         const inputDescription = document.querySelector('.input-description');
         const description = inputDescription.value;
+
+        document.querySelector('.input-data-button').addEventListener('click', () => {
+            console.log('click');
+        });
         document.querySelector('.input-data-container').classList.add('hide-input-container');
 
         if (name === '' || description === '') {
             alert('Please insert name and description');
             return;
         }
-        this.taskItem.push({
-            name,
-            description,
-            id: this.taskItem.length + 1,
-            stage: 'todo'
-        });
+        if (this.editingTaskId) {
+            const task = this.taskItem.find(task => task.id === this.editingTaskId);
+            task.name = name;
+            task.description = description;
+            this.editingTaskId = null;
+        } else {
+            this.taskItem.push({
+                name,
+                description,
+                id: this.taskItem.length + 1,
+                stage: 'todo'
+            });
+        }
         inputName.value = '';
         inputDescription.value = '';
 
@@ -101,6 +116,25 @@ const TaskList = {
                     task.stage = 'inprogress';
                     renderHTMl();
                 }
+            });
+        });
+    },
+
+    editTask() {
+        document.querySelectorAll('.edit-btn').forEach((button) => {
+            button.addEventListener('click', () => {
+                const taskId = parseInt(button.dataset.taskId);
+                const task = this.taskItem.find(task => task.id === taskId);
+
+                const inputName = document.querySelector('.input-name');
+                inputName.value = task.name;
+
+                const inputDescription = document.querySelector('.input-description');
+                inputDescription.value = task.description;
+
+                this.editingTaskId = taskId;
+
+                this.openATaskModule();
             });
         });
     }
@@ -185,10 +219,9 @@ const TaskList = {
 
 
 
-document.querySelector('.add-task-btn')
-    .addEventListener('click', () => TaskList.openATaskModule());
+document.querySelector('.add-task-btn').addEventListener('click', () => TaskList.openATaskModule());
 
-document.querySelector('.input-data-button').addEventListener('click', () => TaskList.addTask());
+document.querySelector('.add-new-task').addEventListener('click', () => TaskList.addTask());
 
 document.querySelector('.input-data-button').addEventListener('click', () => TaskList.deleteAllTask('tasks'));
 

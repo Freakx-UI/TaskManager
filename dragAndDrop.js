@@ -1,18 +1,17 @@
  const DragAndDrop = {
      applyDragAndDrop() {
-         console.log('this is drag and drop');
          const taskContainers = document.querySelectorAll('.task-container');
          const stageContainer = document.querySelectorAll('.stage-containers');
 
          taskContainers.forEach(task => {
-                 task.addEventListener('dragstart', DragAndDrop.handleDragStart);
+                 task.addEventListener('dragstart', this.handleDragStart);
 
              }),
 
 
              stageContainer.forEach(task => {
-                 task.addEventListener('dragover', DragAndDrop.handleDragOver);
-                 task.addEventListener('drop', DragAndDrop.handleDrop);
+                 task.addEventListener('dragover', this.handleDragOver);
+                 task.addEventListener('drop', this.handleDrop);
 
              })
      },
