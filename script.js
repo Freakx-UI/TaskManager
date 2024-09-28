@@ -49,14 +49,15 @@ const TaskList = {
                 name,
                 date,
                 description,
-                id: this.taskItem.length + 1,
+                id: Date.now(),
+                /* Math.floor(Math.random() * 1000000)*/
                 stage: 'todo'
             });
         }
         inputName.value = '';
         inputDescription.value = '';
         inputDate.value = '';
-
+        console.log(this.taskItem.id)
         renderHTMl();
     },
 
