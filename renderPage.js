@@ -53,6 +53,7 @@ function renderHTMl() {
                     ${buttonsHtml}
                 </div>
             </div>
+                <div class="date">Ecxecution date : ${task.date}</div>
             <div class="description">${task.description.replaceAll("\n", "<br>")}</div>
         </div>
     `;

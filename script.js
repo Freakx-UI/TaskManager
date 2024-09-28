@@ -23,6 +23,9 @@ const TaskList = {
         const inputName = document.querySelector('.input-name');
         const name = inputName.value;
 
+        const inputDate = document.querySelector('.input-date');
+        const date = inputDate.value;
+
         const inputDescription = document.querySelector('.input-description');
         const description = inputDescription.value;
 
@@ -38,11 +41,13 @@ const TaskList = {
         if (this.editingTaskId) {
             const task = this.taskItem.find(task => task.id === this.editingTaskId);
             task.name = name;
+            task.date = date;
             task.description = description;
             this.editingTaskId = null;
         } else {
             this.taskItem.push({
                 name,
+                date,
                 description,
                 id: this.taskItem.length + 1,
                 stage: 'todo'
@@ -50,6 +55,7 @@ const TaskList = {
         }
         inputName.value = '';
         inputDescription.value = '';
+        inputDate.value = '';
 
         renderHTMl();
     },
@@ -128,6 +134,9 @@ const TaskList = {
 
                 const inputName = document.querySelector('.input-name');
                 inputName.value = task.name;
+
+                const inputDate = document.querySelector('.input-date');
+                inputDate.value = task.date;
 
                 const inputDescription = document.querySelector('.input-description');
                 inputDescription.value = task.description;
