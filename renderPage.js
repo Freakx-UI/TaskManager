@@ -1,5 +1,4 @@
-function renderHTMl() {
-    const listOfTask = TaskList.taskItem;
+function renderHTMl(listOfTask) {
     let todoHTMl = '';
     let inprogressHTMl = '';
     let onholdHTMl = '';
@@ -7,7 +6,6 @@ function renderHTMl() {
     let html = '';
 
     listOfTask.forEach((task, index) => {
-        console.log(listOfTask);
         let buttonsHtml = '';
 
         if (task.stage === 'todo') {
@@ -46,7 +44,7 @@ function renderHTMl() {
         };
 
         const html = `
-        <div class="task-container" draggable="true" data-task-id="${task.id}">
+        <div class="task-container" draggable="true" data-task-date="${task.date}" data-task-id="${task.id}">
             <div class="title-and-buttons">
                 <div class="name">${task.name}</div>
                 <div>

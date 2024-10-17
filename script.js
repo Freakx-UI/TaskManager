@@ -58,7 +58,7 @@ const TaskList = {
         inputDescription.value = '';
         inputDate.value = '';
         console.log(this.taskItem.id)
-        renderHTMl();
+        renderHTMl(this.taskItem);
     },
 
     deleteTask() {
@@ -66,7 +66,7 @@ const TaskList = {
             button.addEventListener('click', () => {
                 const index = this.taskItem.findIndex(task => task.id === parseInt(button.dataset.taskId));
                 this.taskItem.splice(index, 1);
-                renderHTMl();
+                renderHTMl(this.taskItem);
             });
         });
     },
@@ -75,8 +75,7 @@ const TaskList = {
         document.querySelector('.delete-all-button').addEventListener('click', () => {
             this.taskItem = [];
             this.saveToStorage(localStoragekey, this.taskItem);
-            renderHTMl();
-            console.log(this.taskItem);
+            renderHTMl(this.taskItem);
         });
     },
 
@@ -96,7 +95,7 @@ const TaskList = {
                             break;
                     }
                 }
-                renderHTMl();
+                renderHTMl(this.taskItem);
             });
         });
     },
@@ -108,7 +107,7 @@ const TaskList = {
                 const task = this.taskItem.find(task => task.id === taskId);
                 if (task) {
                     task.stage = 'onhold';
-                    renderHTMl();
+                    renderHTMl(this.taskItem);
                 }
             });
         });
@@ -121,7 +120,7 @@ const TaskList = {
                 const task = this.taskItem.find(task => task.id === taskId);
                 if (task) {
                     task.stage = 'inprogress';
-                    renderHTMl();
+                    renderHTMl(this.taskItem);
                 }
             });
         });
@@ -162,7 +161,7 @@ document.querySelector('.input-data-button').addEventListener('click', () => Tas
 
 document.querySelector('.persist-btn').addEventListener('click', () => TaskList.saveToStorage('tasks', TaskList.taskItem));
 
-
+Filter.openFilter();
 TaskList.deleteAllTask('tasks');
 TaskList.loadFromStorage('tasks');
-renderHTMl();
+renderHTMl(TaskList.taskItem);
