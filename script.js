@@ -147,7 +147,11 @@ const TaskList = {
                 this.openATaskModule();
             });
         });
-    }
+    },
+
+    // filterByDate(){
+    //     this.taskItem.filter(t=>)
+    // }
 };
 
 document.querySelector('.add-task-btn').addEventListener('click', () => TaskList.openATaskModule());
