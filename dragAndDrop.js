@@ -53,7 +53,7 @@ const DragAndDrop = {
                 task.stage = 'done';
             }
 
-            renderHTMl(this.taskItem);
+            renderHTMl(TaskList.taskItem);
         }
     }
 }
