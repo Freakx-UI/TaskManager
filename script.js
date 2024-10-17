@@ -29,9 +29,7 @@ const TaskList = {
         const inputDescription = document.querySelector('.input-description');
         const description = inputDescription.value;
 
-        document.querySelector('.input-data-button').addEventListener('click', () => {
-            console.log('click');
-        });
+
         document.querySelector('.input-data-container').classList.add('hide-input-container');
 
         if (name === '' || description === '') {
@@ -57,7 +55,6 @@ const TaskList = {
         inputName.value = '';
         inputDescription.value = '';
         inputDate.value = '';
-        console.log(this.taskItem.id)
         renderHTMl(this.taskItem);
     },
 

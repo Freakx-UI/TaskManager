@@ -1,7 +1,6 @@
 const Filter = {
     openFilter() {
         document.querySelector('.filter-btn').addEventListener('click', () => {
-            console.log('open date filter');
             let element = document.querySelector('.filter-date');
             if (element.style.display === "none" || element.style.display === "") {
                 element.style.display = "block";
@@ -9,6 +8,7 @@ const Filter = {
                 element.style.display = "none";
                 this.createFiltredList();
             }
+
 
 
         });
@@ -27,10 +27,20 @@ const Filter = {
             const filtredTaskList = TaskList.taskItem.filter((tasks) => {
                 return tasks.date === date;
             });
-            console.log(filtredTaskList);
             renderHTMl(filtredTaskList);
+            let delBtn = document.querySelector('.delete-filter-btn');
+            if (delBtn.style.display === "none" || delBtn.style.display === "") {
+                delBtn.style.display = "block";
+            } else {
+                delBtn.style.display = "none";
+            }
         }
     }
 
 
 }
+document.querySelector('.delete-filter-btn').addEventListener('click', () => {
+    renderHTMl(TaskList.taskItem);
+    document.querySelector('.delete-filter-btn').style.display = "none";
+
+});

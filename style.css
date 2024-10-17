@@ -74,6 +74,10 @@ body {
     display: none;
 }
 
+.delete-filter-btn {
+    display: none;
+}
+
 .input-data-button:hover {
     opacity: 0.9;
     transform: scale(1.05);
